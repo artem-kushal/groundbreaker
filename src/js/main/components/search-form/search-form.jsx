@@ -16,9 +16,12 @@ export default class SearchForm extends React.PureComponent {
     static propTypes = {
         searchString: PropTypes.string.isRequired,
         onChangeSearchString: PropTypes.func.isRequired,
+        onSearchUsers: PropTypes.func.isRequired,
     };
 
     onChangeSearchString = (e, val) => this.props.onChangeSearchString(val);
+
+    onBtnClick = () => this.props.onSearchUsers(this.props.searchString);
 
     render() {
         return (
@@ -32,7 +35,7 @@ export default class SearchForm extends React.PureComponent {
                     onChange={this.onChangeSearchString}
                     value={this.props.searchString}
                 />
-                <RaisedButton style={btnStyle} label="Search" primary />
+                <RaisedButton style={btnStyle} label="Search" primary onClick={this.onBtnClick} />
             </Paper>
         );
     }

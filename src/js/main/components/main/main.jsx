@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import SearchFormContainer from 'main/containers/search-form-container';
-import ResultPanel from 'main/components/result-panel/result-panel';
+import ResultPanelContainer from 'main/containers/result-panel-container';
 
 import * as appReducers from 'main/reducers';
 
@@ -18,7 +18,7 @@ export default () => (
         <MuiThemeProvider>
             <div className="page-container">
                 <SearchFormContainer />
-                <ResultPanel />
+                <ResultPanelContainer />
             </div>
         </MuiThemeProvider>
     </Provider>

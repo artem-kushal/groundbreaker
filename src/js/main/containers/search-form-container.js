@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import SearchForm from 'main/components/search-form/search-form';
 
-import { changeSearchString } from 'main/actions/main-actions';
+import { changeSearchString, searchUsers } from 'main/actions/main-actions';
 
 export default connect(
     state => ({
@@ -10,5 +10,6 @@ export default connect(
     }),
     dispatch => ({
         onChangeSearchString: searchString => dispatch(changeSearchString(searchString)),
+        onSearchUsers: searchString => dispatch(searchUsers(searchString)),
     }),
 )(SearchForm);
