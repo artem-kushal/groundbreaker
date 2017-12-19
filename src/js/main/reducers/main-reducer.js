@@ -18,10 +18,8 @@ const MainRecord = Record({
 
 export default handleActions(
     {
-        [changeSearchString]: (state, action) => {
-            const a = action;
-            state.set('searchString', action.searchString);
-        },
+        [changeSearchString]: (state, action) =>
+            state.set('searchString', action.payload.searchString),
     },
     new MainRecord(),
 );

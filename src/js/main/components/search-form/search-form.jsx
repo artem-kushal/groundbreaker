@@ -18,6 +18,8 @@ export default class SearchForm extends React.PureComponent {
         onChangeSearchString: PropTypes.func.isRequired,
     };
 
+    onChangeSearchString = (e, val) => this.props.onChangeSearchString(val);
+
     render() {
         return (
             <Paper zDepth={1} className="search-form">
@@ -27,14 +29,10 @@ export default class SearchForm extends React.PureComponent {
                     hintText="Enter github user name"
                     floatingLabelText="Search"
                     floatingLabelFixed
-                />
-                <RaisedButton
-                    style={btnStyle}
-                    label="Search"
-                    primary
-                    onChange={this.props.onChangeSearchString}
+                    onChange={this.onChangeSearchString}
                     value={this.props.searchString}
                 />
+                <RaisedButton style={btnStyle} label="Search" primary />
             </Paper>
         );
     }
