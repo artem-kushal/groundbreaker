@@ -13,19 +13,42 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
+import UserDetailsDialog from 'main/components/user-detail-dialog/user-detail-dialog';
+
 import './result-panel.scss';
 
 export default class ResultPanel extends React.PureComponent {
     static propTypes = {
+        searchUsersInfo: PropTypes.instanceOf(Map).isRequired,
         users: PropTypes.instanceOf(Map).isRequired,
+        onGetUser: PropTypes.func.isRequired,
+    };
+
+    state = {
+        isUserDetailDialogOpened: false,
+        selectedUserId: null,
+    };
+
+    onHandleCloseDialog = () =>
+        this.setState({
+            isUserDetailDialogOpened: false,
+        });
+
+    onTableCellClick = (user) => {
+        this.props.onGetUser(user.get('login'));
+        this.setState({
+            isUserDetailDialogOpened: true,
+            selectedUserId: user.get('id'),
+        });
     };
 
     render() {
-        const { users } = this.props;
+        const { searchUsersInfo, users } = this.props;
+        const { selectedUserId } = this.state;
 
         return (
             <Paper zDepth={1} className="result-panel">
-                {users.isEmpty() ? (
+                {searchUsersInfo.isEmpty() ? (
                     <p>No results</p>
                 ) : (
                     <Table>
@@ -36,10 +59,15 @@ export default class ResultPanel extends React.PureComponent {
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false}>
-                            {users.toArray().map(user => (
+                            {searchUsersInfo.toArray().map(user => (
                                 <TableRow key={user.get('id')}>
                                     <TableRowColumn>
-                                        <Avatar src={user.get('avatarUrl')} size={100} />
+                                        <Avatar
+                                            src={user.get('avatarUrl')}
+                                            size={100}
+                                            onClick={() => this.onTableCellClick(user)}
+                                            className="result-panel__user-avatar"
+                                        />
                                     </TableRowColumn>
                                     <TableRowColumn>{user.get('login')}</TableRowColumn>
                                 </TableRow>
@@ -47,6 +75,14 @@ export default class ResultPanel extends React.PureComponent {
                         </TableBody>
                     </Table>
                 )}
+                <UserDetailsDialog
+                    isOpen={this.state.isUserDetailDialogOpened}
+                    onClose={this.onHandleCloseDialog}
+                    userName={users.getIn([selectedUserId, 'userName'])}
+                    avatarUrl={users.getIn([selectedUserId, 'avatarUrl'])}
+                    repositories={users.getIn([selectedUserId, 'repositories'])}
+                    isUserInfoLoading={users.getIn([selectedUserId, 'isUserInfoLoading'])}
+                />
             </Paper>
         );
     }

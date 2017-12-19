@@ -1,15 +1,10 @@
 import { Record, List } from 'immutable';
 
-const RepositoryRecord = Record({
-    id: null,
-    name: null,
-    description: null,
-    issuesCount: null,
-});
-
-const UserRecord = Record({
+export default Record({
     id: null,
     login: null,
+    userName: null,
     avatarUrl: null,
     repositories: new List(),
+    isUserInfoLoading: true,
 });
