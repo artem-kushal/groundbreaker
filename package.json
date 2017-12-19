@@ -5,7 +5,6 @@
     "main": "src/js/index.jsx",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "precommit": "eslint --ext .jsx --ext .js src",
         "preinstall": "npm i -g eslint",
         "dev": "webpack-dev-server --open --config webpack.config.dev.js",
         "prod": "webpack -p --config webpack.config.prod.js"
@@ -16,11 +15,13 @@
         "axios": "^0.17.1",
         "classnames": "^2.2.5",
         "immutable": "^3.8.2",
+        "material-ui": "^0.20.0",
         "prop-types": "^15.6.0",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-redux": "^5.0.6",
         "redux": "^3.7.2",
+        "redux-actions": "^2.2.1",
         "redux-thunk": "^2.2.0"
     },
     "devDependencies": {
@@ -54,9 +55,5 @@
         "webpack": "^3.8.1",
         "webpack-dev-server": "^2.9.5"
     },
-    "browserslist": [
-        "safari > 7",
-        "ie > 10",
-        "ff > 20"
-    ]
+    "browserslist": ["safari > 7", "ie > 10", "ff > 20"]
 }
