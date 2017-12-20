@@ -6,10 +6,10 @@ import UserRecord from 'main/records/user-record';
 import RepositoryRecord from 'main/records/repo-record';
 
 const QUERY_HOST_URL = 'https://api.github.com';
-const AUTH_TOKEN = '';
+// const AUTH_TOKEN = '';
 
 axios.defaults.baseURL = QUERY_HOST_URL;
-axios.defaults.headers.common.Authorization = `token ${AUTH_TOKEN}`;
+// axios.defaults.headers.common.Authorization = `token ${AUTH_TOKEN}`;
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 

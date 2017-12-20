@@ -79,6 +79,7 @@ export default class ResultPanel extends React.PureComponent {
                     isOpen={this.state.isUserDetailDialogOpened}
                     onClose={this.onHandleCloseDialog}
                     userName={users.getIn([selectedUserId, 'userName'])}
+                    login={users.getIn([selectedUserId, 'login'])}
                     avatarUrl={users.getIn([selectedUserId, 'avatarUrl'])}
                     repositories={users.getIn([selectedUserId, 'repositories'])}
                     isUserInfoLoading={users.getIn([selectedUserId, 'isUserInfoLoading'])}

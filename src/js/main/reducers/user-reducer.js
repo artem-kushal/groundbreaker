@@ -10,6 +10,7 @@ export default handleActions(
 
             return state.set(userInfo.get('id'), userInfo.set('repositories', reposInfo));
         },
+
         [getIssuesSuccess]: (state, action) => {
             const { userId, repoName, ussuesCount } = action.payload;
 

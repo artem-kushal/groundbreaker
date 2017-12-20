@@ -18,6 +18,7 @@
         "material-ui": "^0.20.0",
         "prop-types": "^15.6.0",
         "react": "^16.2.0",
+        "react-custom-scrollbars": "^4.2.1",
         "react-dom": "^16.2.0",
         "react-redux": "^5.0.6",
         "redux": "^3.7.2",
@@ -55,5 +56,9 @@
         "webpack": "^3.8.1",
         "webpack-dev-server": "^2.9.5"
     },
-    "browserslist": ["safari > 7", "ie > 10", "ff > 20"]
+    "browserslist": [
+        "safari > 7",
+        "ie > 10",
+        "ff > 20"
+    ]
 }

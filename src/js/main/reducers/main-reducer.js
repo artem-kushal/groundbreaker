@@ -6,7 +6,6 @@ import { changeSearchString, searchUsersSuccess, resetSearch } from 'main/action
 const MainRecord = Record({
     searchUsersInfo: new Map(),
     searchString: '',
-    isSearchUsersLoading: false,
 });
 
 export default handleActions(
