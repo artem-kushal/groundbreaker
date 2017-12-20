@@ -11,7 +11,10 @@ import {
 
 const delay = new Delay();
 
-const requestError = createAction('REQUIEST_ERROR');
+export const requestError = createAction('REQUIEST_ERROR', (errorCode, message) => ({
+    errorCode,
+    message,
+}));
 
 export const searchUsersSuccess = createAction('SEARCH_USERS_SUCCESS', searchUsers => ({
     searchUsers,
@@ -24,7 +27,7 @@ export const searchUsers = searchString => (dispatch, getState) =>
                 dispatch(searchUsersSuccess(users));
             }
         },
-        error => dispatch(requestError(error)),
+        ({ data, status }) => dispatch(requestError(status, data.message)),
     );
 
 export const changeSearchString = createAction('CHANGE_SEARCH_STRING', searchString => ({
@@ -58,7 +61,7 @@ export const getIssues = (userId, userName, repoName) => (dispatch, getState) =>
                 dispatch(getIssuesSuccess(userId, repoName, ussuesCount));
             }
         },
-        error => dispatch(requestError(error)),
+        ({ data, status }) => dispatch(requestError(status, data.message)),
     );
 
 export const getUserSuccess = createAction('GET_USER_SUCCESS', (userInfo, reposInfo) => ({
@@ -75,5 +78,5 @@ export const getUser = userName => dispatch =>
                 dispatch(getIssues(userInfo.get('id'), userInfo.get('login'), repoInfo.get('name')));
             });
         },
-        error => dispatch(requestError(error)),
+        ({ data, status }) => dispatch(requestError(status, data.message)),
     );
