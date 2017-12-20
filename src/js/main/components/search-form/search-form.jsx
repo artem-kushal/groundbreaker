@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
-import './search-form.scss';
+import { ESC_KEY_CODE } from 'main/constants/main-constants';
 
-const ESC_KEY_CODE = 27;
+import './search-form.scss';
 
 export default class SearchForm extends React.PureComponent {
     static propTypes = {

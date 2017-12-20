@@ -51,9 +51,13 @@ export const getIssuesSuccess = createAction(
     }),
 );
 
-export const getIssues = (userId, userName, repoName) => dispatch =>
+export const getIssues = (userId, userName, repoName) => (dispatch, getState) =>
     fetchGetIssues(userName, repoName).then(
-        ussuesCount => dispatch(getIssuesSuccess(userId, repoName, ussuesCount)),
+        (ussuesCount) => {
+            if (getState().mainInfo.get('searchString')) {
+                dispatch(getIssuesSuccess(userId, repoName, ussuesCount));
+            }
+        },
         error => dispatch(requestError(error)),
     );
 

@@ -7,6 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import { Scrollbars } from 'react-custom-scrollbars';
 
+import { ESC_KEY_CODE } from 'main/constants/main-constants';
+
 import Avatar from 'material-ui/Avatar';
 import {
     Table,
@@ -41,6 +43,20 @@ export default class UserDetailDialog extends React.PureComponent {
         repositories: new List(),
 
         isUserInfoLoading: true,
+    };
+
+    componentWillMount() {
+        document.body.addEventListener('keydown', this.onKeyDown);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('keydown', this.onKeyDown);
+    }
+
+    onKeyDown = (e) => {
+        if (e.keyCode === ESC_KEY_CODE) {
+            this.props.onClose();
+        }
     };
 
     render() {
