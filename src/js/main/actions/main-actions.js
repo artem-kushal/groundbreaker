@@ -1,5 +1,7 @@
 import { createAction } from 'redux-actions';
 
+import Delay from 'main/tools/delay-tools';
+
 import {
     fetchSearchUsers,
     fetchGetUser,
@@ -7,21 +9,38 @@ import {
     fetchGetIssues,
 } from 'main/controllers/app-controller';
 
-export const changeSearchString = createAction('CHANGE_SEARCH_STRING', searchString => ({
-    searchString,
-}));
+const delay = new Delay();
+
+const requestError = createAction('REQUIEST_ERROR');
 
 export const searchUsersSuccess = createAction('SEARCH_USERS_SUCCESS', searchUsers => ({
     searchUsers,
 }));
 
-const requestError = createAction('REQUIEST_ERROR');
-
-export const searchUsers = searchString => dispatch =>
+export const searchUsers = searchString => (dispatch, getState) =>
     fetchSearchUsers(searchString).then(
-        users => dispatch(searchUsersSuccess(users)),
+        (users) => {
+            if (getState().mainInfo.get('searchString')) {
+                dispatch(searchUsersSuccess(users));
+            }
+        },
         error => dispatch(requestError(error)),
     );
+
+export const changeSearchString = createAction('CHANGE_SEARCH_STRING', searchString => ({
+    searchString,
+}));
+
+export const resetSearch = createAction('RESET_SEARCH');
+
+export const changeSearch = searchString => (dispatch) => {
+    dispatch(changeSearchString(searchString));
+    if (searchString) {
+        delay.start(() => dispatch(searchUsers(searchString), 1000));
+    } else {
+        dispatch(resetSearch());
+    }
+};
 
 export const getIssuesSuccess = createAction(
     'GET_ISSUES_SUCCESS',

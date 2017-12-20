@@ -24,7 +24,7 @@ export const fetchSearchUsers = userName =>
                     avatarUrl: item.avatar_url,
                 }),
             ])),
-        error => error,
+        error => Promise.reject(error),
     );
 
 export const fetchGetUser = userName =>
@@ -37,7 +37,7 @@ export const fetchGetUser = userName =>
                 avatarUrl: data.avatar_url,
                 isUserInfoLoading: false,
             }),
-        error => error,
+        error => Promise.reject(error),
     );
 
 export const fetchGetRepos = userName =>
@@ -49,10 +49,10 @@ export const fetchGetRepos = userName =>
                     name: item.name,
                     description: item.description,
                 }))),
-        error => error,
+        error => Promise.reject(error),
     );
 
 export const fetchGetIssues = (userName, repoName) =>
     axios
         .get(`/repos/${userName}/${repoName}/issues`)
-        .then(({ data }) => data.length, error => error);
+        .then(({ data }) => data.length, error => Promise.reject(error));

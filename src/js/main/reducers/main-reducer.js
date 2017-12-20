@@ -1,12 +1,11 @@
 import { handleActions } from 'redux-actions';
 import { Record, Map } from 'immutable';
 
-import { changeSearchString, searchUsersSuccess } from 'main/actions/main-actions';
+import { changeSearchString, searchUsersSuccess, resetSearch } from 'main/actions/main-actions';
 
 const MainRecord = Record({
     searchUsersInfo: new Map(),
     searchString: '',
-    selectedUserId: null,
     isSearchUsersLoading: false,
 });
 
@@ -17,6 +16,8 @@ export default handleActions(
 
         [searchUsersSuccess]: (state, action) =>
             state.set('searchUsersInfo', action.payload.searchUsers),
+
+        [resetSearch]: state => state.set('searchUsersInfo', new Map()).set('searchString', ''),
     },
     new MainRecord(),
 );

@@ -2,26 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import './search-form.scss';
 
-const btnStyle = {
-    height: 52,
-    width: 120,
-    marginTop: 10,
-};
+const ESC_KEY_CODE = 27;
 
 export default class SearchForm extends React.PureComponent {
     static propTypes = {
         searchString: PropTypes.string.isRequired,
         onChangeSearchString: PropTypes.func.isRequired,
-        onSearchUsers: PropTypes.func.isRequired,
+        onResetSearch: PropTypes.func.isRequired,
+    };
+
+    componentWillMount() {
+        document.body.addEventListener('keydown', this.onKeyDown);
+    }
+
+    componentWillUnmount() {
+        document.body.removeEventListener('keydown', this.onKeyDown);
+    }
+
+    onKeyDown = (e) => {
+        if (e.keyCode === ESC_KEY_CODE) {
+            this.props.onResetSearch();
+        }
     };
 
     onChangeSearchString = (e, val) => this.props.onChangeSearchString(val);
-
-    onBtnClick = () => this.props.onSearchUsers(this.props.searchString);
 
     render() {
         return (
@@ -35,7 +42,6 @@ export default class SearchForm extends React.PureComponent {
                     onChange={this.onChangeSearchString}
                     value={this.props.searchString}
                 />
-                <RaisedButton style={btnStyle} label="Search" primary onClick={this.onBtnClick} />
             </Paper>
         );
     }

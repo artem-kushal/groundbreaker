@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { Map } from 'immutable';
 
-import { getUserSuccess, getIssuesSuccess } from 'main/actions/main-actions';
+import { getUserSuccess, getIssuesSuccess, resetSearch } from 'main/actions/main-actions';
 
 export default handleActions(
     {
@@ -20,6 +20,8 @@ export default handleActions(
                     item.set('issuesCount', ussuesCount).set('isCountIssuesLoading', false));
             });
         },
+
+        [resetSearch]: state => state.clear(),
     },
     new Map(),
 );
